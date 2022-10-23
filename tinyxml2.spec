@@ -1,13 +1,10 @@
-%global         commit          8c8293ba8969a46947606a93ff0cb5a083aab47a
-%global         shortcommit     %(c=%{commit}; echo ${c:0:7})
-
 Name:           tinyxml2
-Version:        6.0.0
-Release:        5
+Version:        9.0.0
+Release:        1
 Summary:        C++ XML parser
 License:        zlib
 URL:            https://github.com/leethomason/%{name}
-Source0:        https://github.com/leethomason/%{name}/archive/%{commit}/%{name}-%{version}-%{shortcommit}.tar.gz
+Source0:        https://github.com/leethomason/%{name}/archive/refs/tags/%{version}.tar.gz
 BuildRequires:  gcc-c++ cmake
 
 %description
@@ -23,7 +20,7 @@ The devel package contains development files for tinyxml2.It provides
 header files and libraries for tinyxml2.
 
 %prep
-%autosetup -n %{name}-%{commit}
+%autosetup -n %{name}-%{version}
 chmod -c -x *.cpp *.h
 sed -i -e 's,lib/,${CMAKE_INSTALL_LIBDIR}/,g' CMakeLists.txt
 
@@ -46,8 +43,8 @@ cd objdir
 
 %files
 %doc readme.md
-%{_libdir}/lib%{name}.so.6.0.0
-%{_libdir}/lib%{name}.so.6
+%{_libdir}/lib%{name}.so.9.0.0
+%{_libdir}/lib%{name}.so.9
 
 %files devel
 %{_includedir}/%{name}.h
@@ -56,5 +53,9 @@ cd objdir
 %{_libdir}/cmake/%{name}/*.cmake
 
 %changelog
+* Mon Oct 24 2022 YukariChiba <i@0x7f.cc> - 9.0.0-1
+- Upgrade version to 9.0.0
+- Switch to use stable version source url
+
 * Thu Nov 21 2019 zhujunhao <zhujunhao5@huawei.com> - 6.0.0-5
 - Initial package.
